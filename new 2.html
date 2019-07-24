@@ -4,7 +4,50 @@
 </head>
 <body>
 <p>
-Yes
+Strenght: <span id='strenght'></span>
+<br>
+Defense: <span id='defense'></span>
+<br>
+Health: <span id='health'></span>/<span id='maxhealth'></span>
+<br>
+<button Onclick="fight(1)">Fight</button> (-1 hp)
+<br>
+<button Onclick="quest(1)">Go on a quest</button> (-10 health)
+<br>
+Gold: <span id='gold'></span>
+<br>
+<button Onclick="training(1)">Train yourself</button> (costs 100 gold as a one time purchase, and 10 gold continously)
+<br>
+Troops: <span id='troops'></span>
+<br>
+<button Onclick="hire(1)">Hire troops</button> (costs 250 gold)
+<script>
+var strenght=1
+var defense=1
+var gold=0
+var contraining=0
+var troops=0
+var health=2
+var maxhealth=2
+function update(number) {document.getElementById('strenght').innerHTML = strenght ; document.getElementById('defense').innerHTML = defense ; document.getElementById('health').innerHTML = health ; document.getElementById('maxhealth').innerHTML = maxhealth ; document.getElementById('gold').innerHTML = gold ; document.getElementById('troops').innerHTML = troops ;}
+setInterval(update,50)
+function stuff(number) {maxhealth=strenght+defense/2}
+setInterval(stuff,50)
+function regen(number) {health=health+defense/2}
+setInterval(regen,2000)
+function maximum(number) {if (health>maxhealth) {health=maxhealth}}
+setInterval(maximum,50)
+function fight(number) {health=health-1;strenght=strenght+1;defense=defense+1}
+function quest(number) {health=health-10;strenght=strenght+2;defense=defense+1;gold=gold+10}
+function training(number) {gold=gold-100;defense=defense+2;contraining=contraining+1}
+function training2(number) {if (contraining>=1) {gold=gold-10*contraining;defense=defense+5*contraining} }
+setInterval(training2,5000)
+function lost(number) {if (health<0) {alert("You lost.");maxhealth=2;gold=0;contraining=0;strenght=1;defense=1;health=2;troops=0} }
+setInterval(lost,50)
+function debt(number) {if (gold<-100) {health=health-100} }
+setInterval(debt,1000)
+function hire(number) {if (gold>=250) {troops=troops+1; gold=gold-250} }
+</script>
 </p>
 </body>
 </html>
