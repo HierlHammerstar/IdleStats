@@ -2,7 +2,7 @@
 <head>
 <title> Stats Idle </title>
 </head>
-<body>
+<body onload="javascript:loadit()">
 <p>
 Strenght: <span id='strenght'></span>
 <br>
@@ -52,6 +52,20 @@ function debt(number) {if (gold<-100) {health=health-gold} }
 setInterval(debt,1000)
 function hire(number) {if (gold>=250) {troops=troops+1; gold=gold-250} }
 function stoptraining(number) {contraining=0}
+function upkeep(number) {gold=gold-troops*10}
+setInterval(upkeep,5000)
+var save = {
+strenght: strenght,
+defense: defense,
+gold: gold,
+contraining: contraining,
+troops: troops,
+health: health,
+maxhealth: maxhealth
+}
+function saveit(number) {localStorage.setItem("save",JSON.stringify(save))}
+setInterval (saveit,5000)
+function loadit(number) {var savegame = JSON.parse(localStorage.getItem("save"));}
 </script>
 </p>
 </body>
